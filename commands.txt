@@ -1,0 +1,6 @@
+#1 activate env
+    source env/bin/activate
+#2 pip install 
+    pip3 install -r requirements.txt
+#3 runserver
+    python3 manage.py runserver

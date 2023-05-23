@@ -1,0 +1,36 @@
+Ever since Django dropped pytz support with its version 4.0, it has been a huge pain to setup mongodb as a backend.
+
+So this a simple guide i decided to make in case someone else is going thru the same thing
+
+- setup a mongodb account for atlas
+- create a cluster and then create a user
+- give network access ( set it to 0.0.0.0/0 )
+- then browse collections and create a db with a collection
+
+
+- now go to term and create a virtual env and install the following packages(keep in mind that the version numbers ar exactly the same)
+asgiref==3.5.0 
+Django==4.0.3 
+djongo==1.3.6 
+dnspython==2.2.1 
+pykerberos==1.2.4 
+pymongo==3.12.1 
+python-snappy==0.6.1 
+pytz==2022.1 
+sqlparse==0.2.4 
+
+- now create a django website
+- and add in the following to its settings.py file 
+DATABASES = {
+        'default': {
+            'ENGINE': 'djongo',
+            'NAME': 'your-db-name',
+            'ENFORCE_SCHEMA': False,
+            'CLIENT': {
+                'host': 'mongodb+srv://<username>:<password>@<atlas cluster>/<myFirstDatabase>?retryWrites=true&w=majority'
+            }  
+        }
+}
+
+make changes respectively
+the host field has to be replaced by the connection string in the connect tab of ur dashboard
